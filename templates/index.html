@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Futbol</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Gestión de Base de Datos de Futbol</h2>
+        <a href="{{ url_for('logout') }}" class="btn btn-secondary mb-3">Cerrar Sesión</a>
+		
+		        <!-- Mostrar mensajes flash -->
+        {% with messages = get_flashed_messages(with_categories=True) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+		
+		<!-- Formulario Insertar Temporada -->
+        <h4>Insertar Temporada</h4>
+        <form action="{{ url_for('insertar_temporada') }}" method="post" class="mb-3">
+		    <input type="number" name="idtemporada" placeholder="ID Temporada" class="form-control mb-2" required>
+            <input type="text" name="temporada" placeholder="Temporada" class="form-control mb-2" required>
+            <input type="text" name="division" placeholder="División" class="form-control mb-2" required>
+            <input type="number" name="posicion" placeholder="Posición" class="form-control mb-2" required>
+            <button type="submit" class="btn btn-primary">Insertar Temporada</button>
+        </form>
+
+        <!-- Formulario Eliminar Temporada -->
+        <h4>Eliminar Temporada</h4>
+        <form action="{{ url_for('eliminar_temporada') }}" method="post" class="mb-3">
+            <input type="number" name="idtemporada" placeholder="ID Temporada" class="form-control mb-2" required>
+            <button type="submit" class="btn btn-danger">Eliminar Temporada</button>
+        </form>
+
+        <!-- Formulario Insertar Jugador -->
+        <h4>Insertar Jugador</h4>
+        <form action="{{ url_for('insertar_jugador') }}" method="post" class="mb-3">
+		    <input type="number" name="idjugador" placeholder="ID Jugador" class="form-control mb-2" required>
+            <input type="text" name="apodo" placeholder="Apodo" class="form-control mb-2" required>
+            <input type="text" name="nombre" placeholder="Nombre" class="form-control mb-2" required>
+            <input type="date" name="fechanacimiento" placeholder="Fecha de Nacimiento" class="form-control mb-2" required>
+            <input type="text" name="demarcacion" placeholder="Demarcación" class="form-control mb-2" required>
+            <input type="text" name="ciudad" placeholder="Ciudad" class="form-control mb-2" required>
+            <input type="text" name="pais" placeholder="País" class="form-control mb-2" required>
+            <input type="text" name="alturapeso" placeholder="Altura/Peso" class="form-control mb-2" required>
+            <button type="submit" class="btn btn-primary">Insertar Jugador</button>
+        </form>
+
+        <!-- Formulario Eliminar Jugador -->
+        <h4>Eliminar Jugador</h4>
+        <form action="{{ url_for('eliminar_jugador') }}" method="post" class="mb-3">
+            <input type="number" name="idjugador" placeholder="ID Jugador" class="form-control mb-2" required>
+            <button type="submit" class="btn btn-danger">Eliminar Jugador</button>
+        </form>
+
+        <!-- Formulario Insertar Partido -->
+        <h4>Insertar Partido</h4>
+        <form action="{{ url_for('insertar_partido') }}" method="post" class="mb-3">
+		    <input type="number" name="idpartido" placeholder="ID Partido" class="form-control mb-2" required>
+            <input type="text" name="jornada" placeholder="Jornada" class="form-control mb-2" required>
+            <input type="text" name="resultado" placeholder="Resultado" class="form-control mb-2" required>
+            <input type="text" name="rival" placeholder="Rival" class="form-control mb-2" required>
+            <input type="number" name="golesfavor" placeholder="Goles a Favor" class="form-control mb-2" required>
+            <input type="number" name="golescontra" placeholder="Goles en Contra" class="form-control mb-2" required>
+            <input type="number" name="idtemporada" placeholder="ID Temporada" class="form-control mb-2" required>
+            <input type="number" name="ganado" placeholder="Ganado (0 o 1)" class="form-control mb-2" required>
+            <input type="number" name="empatado" placeholder="Empatado (0 o 1)" class="form-control mb-2" required>
+            <input type="number" name="perdido" placeholder="Perdido (0 o 1)" class="form-control mb-2" required>
+            <input type="date" name="fecha" placeholder="Fecha" class="form-control mb-2">
+            <button type="submit" class="btn btn-primary">Insertar Partido</button>
+        </form>
+
+        <!-- Formulario Eliminar Partido -->
+        <h4>Eliminar Partido</h4>
+        <form action="{{ url_for('eliminar_partido') }}" method="post" class="mb-3">
+            <input type="text" name="idpartido" placeholder="ID Partido" class="form-control mb-2" required>
+            <button type="submit" class="btn btn-danger">Eliminar Partido</button>
+        </form>
+
+        <!-- Formulario Insertar PartidoJugador -->
+        <h4>Insertar Partido-Jugador</h4>
+        <form action="{{ url_for('insertar_partidojugador') }}" method="post" class="mb-3">
+			<input type="number" name="idpartidojugador" placeholder="ID Partido-Jugador" class="form-control mb-2" required>
+            <input type="number" name="idpartido" placeholder="ID Partido" class="form-control mb-2" required>
+            <input type="number" name="idjugador" placeholder="ID Jugador" class="form-control mb-2" required>
+            <input type="number" name="partido" placeholder="Partido (0 o 1)" class="form-control mb-2" required>
+            <input type="number" name="titular" placeholder="Titular (0 o 1)" class="form-control mb-2" required>
+            <input type="number" name="suplente" placeholder="Suplente (0 o 1)" class="form-control mb-2" required>
+            <input type="number" name="minutos" placeholder="Minutos Jugados" class="form-control mb-2" required>
+            <input type="number" name="roja" placeholder="Tarjeta Roja (0 o 1)" class="form-control mb-2" required>
+            <input type="number" name="amarilla" placeholder="Tarjeta Amarilla (0 o 1)" class="form-control mb-2" required>
+            <input type="number" name="gol" placeholder="Goles" class="form-control mb-2" required>
+            <button type="submit" class="btn btn-primary">Insertar Partido-Jugador</button>
+        </form>
+
+        <!-- Formulario Eliminar PartidoJugador -->
+        <h4>Eliminar Partido-Jugador</h4>
+        <form action="{{ url_for('eliminar_partidojugador') }}" method="post" class="mb-3">
+            <input type="text" name="idpartidojugador" placeholder="ID Partido-Jugador" class="form-control mb-2" required>
+            <button type="submit" class="btn btn-danger">Eliminar Partido-Jugador</button>
+        </form>
+
+
+    </div>
+</body>
+</html>
