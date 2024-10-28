@@ -22,6 +22,17 @@ cd tu_repositorio
 python -m venv venv
 source venv/bin/activate  # En Windows usa `venv\Scripts\activate`
 ```
+### Configurar base de datos (app.py):
+
+```
+db_config = {
+    'host': 'mysql',  # Nombre del servicio de MySQL en docker-compose.yml
+    'user': 'root',
+    'password': 'rootpassword',
+    'database': 'futbol_app'
+}
+```
+
 
 ### Instala las dependencias:
 
